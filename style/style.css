@@ -1,0 +1,31 @@
+body {
+
+}
+
+.container {
+	padding: 0px !important;  /* Override bootstrap default padding */
+	margin: 0 !important; /* Override bootstrap default margin */
+}
+
+.contact-list {
+	border-right: 1px solid black;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.toolbar {
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+
+.picture {
+	width: 300px;
+	height: 300px;
+	margin-top: 50px;
+	margin-left: 20px;
+}
+
+.profile-image {
+	max-width: 300px;
+	max-height: 300px;
+}
