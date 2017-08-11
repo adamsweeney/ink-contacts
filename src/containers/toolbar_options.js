@@ -9,7 +9,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 const titleStyle = { marginLeft: 15, color: "black" };
-const toolbarStyle = { backgroundColor: "white"};
 
 class ToolbarOptions extends Component {
 	renderLinks() {
@@ -49,7 +48,7 @@ class ToolbarOptions extends Component {
 	render() {
     return (
 			<div className="toolbar">
-	      <Toolbar style={toolbarStyle}>
+	      <Toolbar>
 	        <ToolbarGroup firstChild={true}>
 						<ToolbarTitle style={titleStyle} text="Contacts App" />
 	        </ToolbarGroup>

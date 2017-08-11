@@ -1,53 +1,85 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchContacts } from '../actions';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import {List, ListItem} from 'material-ui/List';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import {pinkA200, transparent} from 'material-ui/styles/colors';
+import Subheader from 'material-ui/Subheader';
+
+let SelectableList = makeSelectable(List);
+
+function wrapState(ComposedComponent) {
+	return class SelectableList extends Component {
+		static propTypes = {
+      children: PropTypes.node.isRequired,
+    };
+
+		componentWillMount() {
+      this.setState({
+        selectedId: null,
+      });
+    }
+
+		handleRequestChange = (event, id) => {
+      this.setState({
+        selectedId: id,
+      });
+			//this.props.history.push(`/contacts/${selectedId}`);
+    };
+
+		render() {
+      return (
+        <ComposedComponent
+          value={this.state.selectedId}
+          onChange={this.handleRequestChange.bind(this)}
+        >
+          {this.props.children}
+        </ComposedComponent>
+      );
+    }
+	};
+}
+
+SelectableList = wrapState(SelectableList);
 
 class ContactList extends Component {
-	render() {
-		console.log(this.props);
-		if (this.props.authenticated) {
+	renderContacts() {
+		return _.map(this.props.contacts, contact => {
 			return (
-				<div>
-					<List>
-			      <ListItem
-			        primaryText="Chelsea Otakan"
-			        leftIcon={<ActionGrade color={pinkA200} />}
-			        rightAvatar={<Avatar src="images/chexee-128.jpg" />}
-			      />
-			      <ListItem
-			        primaryText="Eric Hoffman"
-			        insetChildren={true}
-			        rightAvatar={<Avatar src="images/kolage-128.jpg" />}
-			      />
-			    </List>
-		    	<Divider inset={true} />
-			    <List>
-			      <ListItem
-			        primaryText="Adelle Charles"
-			        leftAvatar={
-			          <Avatar
-			            color={pinkA200} backgroundColor={transparent}
-			            style={{left: 8}}
-			          >
-			            A
-			          </Avatar>
-			        }
-			        rightAvatar={<Avatar src="images/adellecharles-128.jpg" />}
-			      />
-			      <ListItem
-			        primaryText="Adham Dannaway"
-			        insetChildren={true}
-			        rightAvatar={<Avatar src="images/adhamdannaway-128.jpg" />}
-			      />
-		    	</List>
-				</div>
-			);
+				<ListItem
+					containerElement={<Link to={this.renderPath(contact)} />}
+					value={contact.id}
+					primaryText={this.renderName(contact)}
+				/>
+		 	);
+		});
+	}
+
+	renderName(contact) {
+		return `${contact.first_name} ${contact.last_name}`;
+	}
+
+	renderPath(contact) {
+		return `/contacts/${contact.id}`;
+	}
+
+	render() {
+		if (this.props.authenticated) {
+			if (this.props.contacts) {
+				return (
+					<section className="contact-list">
+						<SelectableList>
+							<Subheader>Contacts</Subheader>
+							{this.renderContacts()}
+						</SelectableList>
+					</section>
+				);
+			}
 		} else {
 			return <div></div>;
 		}
@@ -55,9 +87,9 @@ class ContactList extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log(state);
 	return {
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+		contacts: state.contacts
  	};
 }
 

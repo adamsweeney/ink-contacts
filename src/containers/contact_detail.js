@@ -21,7 +21,9 @@ class ContactDetail extends Component {
 
 	render() {
 		const { contact } = this.props;
-
+		if (!contact) {
+			return <div>Loading...</div>;
+		}
 		return (
 			<div className="row">
 				<div className="col-lg-4 col-md-4 col-sm-4">
@@ -31,27 +33,23 @@ class ContactDetail extends Component {
 				</div>
 				<div className="col-lg-8 col-md-8 col-sm-8">
 					<div className="details">
-						<h3>Eric Hoffman</h3>
+						<h3>{contact.first_name} {contact.last_name}</h3>
 						<hr />
-						<p>First Name: Eric</p>
-						<p>Last Name: Hoffman</p>
-						<p>Phone Number: 2498777855</p>
-						<p>Email: ehoff@gmail.com</p>
+						<p>First Name: {contact.first_name}</p>
+						<p>Last Name: {contact.last_name}</p>
+						<p>Phone Number: {contact.phone_number}</p>
+						<p>Email: {contact.email}</p>
 					</div>
 				</div>
-				{/* <button className="btn btn-danger pull-xs-right" onClick={this.onDeleteClick.bind(this)}>Delete Contact</button> */}
-				{/* <h3>{contact.first_name}</h3>
-				// <h6>Market: {contact.last_name}</h6>
-				// <p>{contact.phone_number}</p>
-				// <p>{contact.email}</p> */}
 			</div>
 		);
 	}
 }
 
-function mapStateToProps({ contacts, auth }, ownProps) {
+function mapStateToProps(state, ownProps) {
 	return {
-		contact: contacts[ownProps.match.params.id]
+		contact: state.contacts[ownProps.match.params.id],
+		authenticated: state.auth.authenticated
  	};
 }
 

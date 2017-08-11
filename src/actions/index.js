@@ -78,7 +78,7 @@ export function fetchContacts() {
 
 export function fetchContact(id) {
 	return function(dispatch) {
-	  axios.get(`${ROOT_URL}/contacts/${id}`, {
+	  axios.get(`${LOCAL_URL}/contacts/${id}`, {
 			headers: { authorization: localStorage.getItem('token')}
 		}).then(response => {
 			dispatch({

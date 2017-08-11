@@ -4,7 +4,7 @@ import _ from 'lodash';
 export default function(state = {}, action) {
 	switch (action.type) {
 		case FETCH_CONTACTS:
-			return _.mapKeys(action.payload.data, 'id');
+			return _.mapKeys(action.payload.data.contacts, 'id');
 	 	case FETCH_CONTACT:
 		 	return { ...state, [ action.payload.data.id ] : action.payload.data };
 		case DELETE_CONTACT:
