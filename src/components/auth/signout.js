@@ -10,14 +10,7 @@ class Signout extends Component {
 	}
 
 	render() {
-		return (
-			<div>
-				<div>You've successfully signed out</div>
-				<Link to="/signin">
-					<RaisedButton label="Sign Back In" primary />
-				</Link>
-			</div>
-		);
+		return <div>You've successfully signed out</div>;
 	}
 }
 
