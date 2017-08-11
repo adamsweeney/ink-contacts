@@ -28,14 +28,14 @@ export function signinUser(values, callback) {
 
 export function signupUser({ email, password }, callback) {
 	return function(dispatch) {
-		axios.post(`${LOCAL_URL}/users/create`, values) //# TODO: implement signup
+		axios.post(`${LOCAL_URL}/users/create`, values) //# TODO: implement signup backend
 			.then(response => {
 				dispatch({ type: SIGNUP_USER });
 				localStorage.setItem('token', response.data.access_token);
 				callback();
 			})
 			.catch(error => {
-				dispatch(authError('Bad Login Info'));
+				dispatch(authError(error));
 			});
 	}
 }
@@ -54,8 +54,9 @@ export function signoutUser() {
 
 export function createContact(values, callback) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/contacts`, values)
-			.then(() => {
+		axios.post(`${LOCAL_URL}/contacts`, values, {
+			headers: { authorization: localStorage.getItem('token') }
+		}).then(() => {
 				dispatch({ type: CREATE_CONTACT });
 				callback();
 			});
@@ -63,29 +64,38 @@ export function createContact(values, callback) {
 }
 
 export function fetchContacts() {
-	const request = axios.get(`${ROOT_URL}/contacts`);
-
-	return {
-		type: FETCH_CONTACTS,
-		payload: request
-	};
+	return function(dispatch) {
+	  axios.get(`${LOCAL_URL}/contacts`, {
+			headers: { authorization: localStorage.getItem('token')}
+		}).then(response => {
+			dispatch({
+				type: FETCH_CONTACTS,
+			 	payload: response
+			});
+		});
+	}
 }
 
 export function fetchContact(id) {
-	const request = axios.get(`${ROOT_URL}/contacts/${id}`);
-
-	return {
-		type: FETCH_CONTACT,
-		payload: request
-	};
+	return function(dispatch) {
+	  axios.get(`${ROOT_URL}/contacts/${id}`, {
+			headers: { authorization: localStorage.getItem('token')}
+		}).then(response => {
+			dispatch({
+				type: FETCH_CONTACT,
+				payload: response
+			});
+		});
+	}
 }
 
 export function deleteContact(id, callback) {
-	const request = axios.delete(`${ROOT_URL}/contacts/${id}`)
-		.then(() => callback());
-
-	return {
-		type: DELETE_CONTACT,
-		payload: id
-	};
+	return function(dispatch) {
+	  axios.delete(`${LOCAL_URL}/contacts/${id}`, {
+			headers: { authorization: localStorage.getItem('token') }
+		}).then(() => {
+			dispatch({ type: DELETE_CONTACT});
+			callback();
+		});
+	}
 }

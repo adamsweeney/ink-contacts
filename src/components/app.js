@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchContacts } from '../actions';
 import ContactList from '../containers/contact_list';
 import ToolbarOptions from '../containers/toolbar_options';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchContacts();
+  }
+
   render() {
     return (
       <div>
@@ -25,3 +31,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, { fetchContacts })(App);
