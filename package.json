@@ -28,7 +28,12 @@
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^1.14.0"
+  },
+  "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1"
   }
 }

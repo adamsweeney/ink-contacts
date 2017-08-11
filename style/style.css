@@ -9,8 +9,10 @@ body {
 
 .contact-list {
 	border-right: 1px solid black;
+	display: flex;
+  flex-direction: column;
+  flex: 1;
 	overflow-y: auto;
-	height: 100%;
 }
 
 .toolbar {
@@ -28,4 +30,17 @@ body {
 .profile-image {
 	max-width: 300px;
 	max-height: 300px;
+}
+
+.details {
+	margin-top: 50px;
+	margin-right: 20px;
+}
+
+.details > h3 {
+	text-align: center;
+}
+
+.details > p {
+	margin-bottom: 30px;
 }

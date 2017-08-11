@@ -10,43 +10,55 @@ import {pinkA200, transparent} from 'material-ui/styles/colors';
 
 class ContactList extends Component {
 	render() {
-		return (
-			<div>
-				<List>
-		      <ListItem
-		        primaryText="Chelsea Otakan"
-		        leftIcon={<ActionGrade color={pinkA200} />}
-		        rightAvatar={<Avatar src="images/chexee-128.jpg" />}
-		      />
-		      <ListItem
-		        primaryText="Eric Hoffman"
-		        insetChildren={true}
-		        rightAvatar={<Avatar src="images/kolage-128.jpg" />}
-		      />
-		    </List>
-	    	<Divider inset={true} />
-		    <List>
-		      <ListItem
-		        primaryText="Adelle Charles"
-		        leftAvatar={
-		          <Avatar
-		            color={pinkA200} backgroundColor={transparent}
-		            style={{left: 8}}
-		          >
-		            A
-		          </Avatar>
-		        }
-		        rightAvatar={<Avatar src="images/adellecharles-128.jpg" />}
-		      />
-		      <ListItem
-		        primaryText="Adham Dannaway"
-		        insetChildren={true}
-		        rightAvatar={<Avatar src="images/adhamdannaway-128.jpg" />}
-		      />
-	    	</List>
-			</div>
-		);
+		console.log(this.props);
+		if (this.props.authenticated) {
+			return (
+				<div>
+					<List>
+			      <ListItem
+			        primaryText="Chelsea Otakan"
+			        leftIcon={<ActionGrade color={pinkA200} />}
+			        rightAvatar={<Avatar src="images/chexee-128.jpg" />}
+			      />
+			      <ListItem
+			        primaryText="Eric Hoffman"
+			        insetChildren={true}
+			        rightAvatar={<Avatar src="images/kolage-128.jpg" />}
+			      />
+			    </List>
+		    	<Divider inset={true} />
+			    <List>
+			      <ListItem
+			        primaryText="Adelle Charles"
+			        leftAvatar={
+			          <Avatar
+			            color={pinkA200} backgroundColor={transparent}
+			            style={{left: 8}}
+			          >
+			            A
+			          </Avatar>
+			        }
+			        rightAvatar={<Avatar src="images/adellecharles-128.jpg" />}
+			      />
+			      <ListItem
+			        primaryText="Adham Dannaway"
+			        insetChildren={true}
+			        rightAvatar={<Avatar src="images/adhamdannaway-128.jpg" />}
+			      />
+		    	</List>
+				</div>
+			);
+		} else {
+			return <div></div>;
+		}
 	}
 }
 
-export default ContactList;
+function mapStateToProps(state) {
+	console.log(state);
+	return {
+		authenticated: state.auth.authenticated
+ 	};
+}
+
+export default connect(mapStateToProps)(ContactList);
