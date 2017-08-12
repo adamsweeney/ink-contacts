@@ -70,13 +70,21 @@ class ContactList extends Component {
 
 	render() {
 		if (this.props.authenticated) {
-			if (this.props.contacts) {
+			if (this.props.contacts && this.props.contacts.length > 0) {
 				return (
 					<section className="contact-list">
 						<SelectableList>
 							<Subheader>Contacts</Subheader>
 							{this.renderContacts()}
 						</SelectableList>
+					</section>
+				);
+			} else {
+				return (
+					<section className="contact-list">
+						<List>
+							<Subheader>No Contacts Yet!</Subheader>
+						</List>
 					</section>
 				);
 			}

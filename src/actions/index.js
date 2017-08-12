@@ -26,11 +26,11 @@ export function signinUser(values, callback) {
 	}
 }
 
-export function signupUser({ email, password }, callback) {
+export function signupUser(values, callback) {
 	return function(dispatch) {
-		axios.post(`${LOCAL_URL}/users/create`, values) //# TODO: implement signup backend
+		axios.post(`${LOCAL_URL}/signup`, values)
 			.then(response => {
-				dispatch({ type: SIGNUP_USER });
+				dispatch({ type: AUTH_USER });
 				localStorage.setItem('token', response.data.access_token);
 				callback();
 			})

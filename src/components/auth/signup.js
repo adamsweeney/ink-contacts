@@ -3,13 +3,13 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-//import { signupUser } from '../../actions';
+import { signupUser } from '../../actions';
 
 class Signup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
+			email: '',
 			password: '',
 			password_confirm: ''
 		}
@@ -26,7 +26,7 @@ class Signup extends Component {
 
 	onSubmit(values) {
 		this.props.signupUser(values, () => {
-			this.props.history.push('/'); 
+			this.props.history.push('/');
 		});
 	}
 
@@ -44,7 +44,7 @@ class Signup extends Component {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
 			<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				<Field label="Email" name="username" value={this.state.username} component={this.renderField} />
+				<Field label="Email" name="email" value={this.state.email} component={this.renderField} />
 				<Field label="Password" name="password" type="password" value={this.state.password} component={this.renderField} />
 				<Field label="Password Confirmation" name="password_confirm" type="password" value={this.state.passwordConfirm} component={this.renderField} />
 				{this.renderAlert()}
@@ -58,10 +58,10 @@ function validate(values) {
 	const errors = {};
 
 	//validate inputs from values
-	if (!values.username) {
-		errors.username = "Enter an email!";
-	} else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.username)) {
-		errors.username = "Please enter a valid email";
+	if (!values.email) {
+		errors.email = "Enter an email!";
+	} else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+		errors.email = "Please enter a valid email";
 	}
 
 	if (!values.password) {
@@ -88,5 +88,5 @@ export default reduxForm({
 	validate,
 	form: 'SignupForm'
 })(
-	connect(mapStateToProps,  null)(Signup)
+	connect(mapStateToProps, { signupUser })(Signup)
 );

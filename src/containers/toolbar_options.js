@@ -38,9 +38,11 @@ class ToolbarOptions extends Component {
 			return (
 				<ToolbarGroup>
 					<Link to="/signin">
-						<RaisedButton label="Sign in" primary={true} />
+						<RaisedButton label="Sign in" primary={true} style={ {marginRight: 10} } />
 					</Link>
-					<RaisedButton label="Sign up" primary={true} />
+					<Link to="/signup">
+						<RaisedButton label="Sign up" primary={true} />
+					</Link>
 				</ToolbarGroup>
 			);
 		}

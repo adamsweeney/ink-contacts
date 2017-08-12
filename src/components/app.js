@@ -7,17 +7,19 @@ import ToolbarOptions from '../containers/toolbar_options';
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchContacts();
+    if (this.props.authenticated) {
+      this.props.fetchContacts();
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <div className="row">
           <ToolbarOptions />
         </div>
-        <div className="row">
-          <div className="col-lg-3 col-md-3 col-sm-3">
+        <div className="row row-flex">
+          <div className="col-lg-3 col-md-3 col-sm-3 contact-column">
             <ContactList />
           </div>
           <div className="col-lg-9 col-md-9 col-sm-9">
@@ -30,6 +32,13 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    contacts: state.contacts,
+    authenticated: state.auth.authenticated
   }
 }
 
