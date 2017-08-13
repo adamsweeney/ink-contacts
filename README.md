@@ -1,4 +1,7 @@
-Boiler plate react project
+Project for company Inkblot.health
+
+Hosted by heroku at:
+https://inkblot-health.herokuapp.com/
 
 Usage
 ---
@@ -6,7 +9,7 @@ Usage
 Start the development server with this command:
 
 ```
-npm start
+npm run dev
 ```
 
 Setup
