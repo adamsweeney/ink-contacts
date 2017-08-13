@@ -8,6 +8,7 @@ export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const SIGNUP_USER = 'SIGNUP_USER';
+export const CONTACTS_ERROR = 'CONTACTS_ERROR';
 
 const ROOT_URL = 'https://inkblot-contacts.herokuapp.com/api';
 const LOCAL_URL = 'http://localhost:3000/api';
@@ -75,6 +76,8 @@ export function fetchContacts() {
 				type: FETCH_CONTACTS,
 			 	payload: response
 			});
+		}).catch(error => {
+			dispatch(contactsError(error));
 		});
 	}
 }
@@ -88,6 +91,8 @@ export function fetchContact(id) {
 				type: FETCH_CONTACT,
 				payload: response
 			});
+		}).catch(error => {
+			dispatch(contactsError(error));
 		});
 	}
 }
@@ -101,4 +106,11 @@ export function deleteContact(id, callback) {
 			callback();
 		});
 	}
+}
+
+export function contactsError(error) {
+	return {
+		type: CONTACTS_ERROR,
+		payload: error
+	};
 }

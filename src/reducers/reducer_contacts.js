@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, FETCH_CONTACT, DELETE_CONTACT, CREATE_CONTACT } from '../actions';
+import { FETCH_CONTACTS, FETCH_CONTACT, DELETE_CONTACT, CREATE_CONTACT, CONTACTS_ERROR } from '../actions';
 import _ from 'lodash';
 
 export default function(state = {}, action) {
@@ -11,6 +11,8 @@ export default function(state = {}, action) {
 			return _.omit(state, action.payload);
 		case CREATE_CONTACT:
 			return { ...state, [ action.payload.data.id ] : action.payload.data };
+		case CONTACTS_ERROR:
+			return { ...state, error: action.payload };
 		default:
 			return state;
 	}

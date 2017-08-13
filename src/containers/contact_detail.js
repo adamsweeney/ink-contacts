@@ -20,8 +20,10 @@ class ContactDetail extends Component {
 	}
 
 	render() {
-		const { contact } = this.props;
-		if (!contact) {
+		const { contact, errorMessage } = this.props;
+		if (errorMessage && !contact) {
+			return <div>Unable to find contact</div>;
+		} else if (!contact) {
 			return <div>Loading...</div>;
 		}
 		return (
@@ -49,7 +51,8 @@ class ContactDetail extends Component {
 function mapStateToProps(state, ownProps) {
 	return {
 		contact: state.contacts[ownProps.match.params.id],
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+		errorMessage: state.contacts.error
  	};
 }
 
