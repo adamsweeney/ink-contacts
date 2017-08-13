@@ -28,8 +28,8 @@ class ContactNew extends Component {
 	}
 
 	onSubmit(values) {
-		this.props.createContact(values, () => {
-			this.props.history.push('/');
+		this.props.createContact(values, response => {
+			this.props.history.push(`/contacts/${response.data.id}`);
 		});
 	}
 

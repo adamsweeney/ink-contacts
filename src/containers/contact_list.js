@@ -69,12 +69,13 @@ class ContactList extends Component {
 	}
 
 	render() {
-		if (this.props.authenticated) {
-			if (this.props.contacts && this.props.contacts.length > 0) {
+		const { authenticated, contacts } = this.props;
+		if (authenticated) {
+			if (contacts && _.size(contacts) > 0) {
 				return (
 					<section className="contact-list">
 						<SelectableList>
-							<Subheader>Contacts</Subheader>
+							<Subheader>Contacts ({_.size(contacts)})</Subheader>
 							{this.renderContacts()}
 						</SelectableList>
 					</section>
@@ -95,6 +96,7 @@ class ContactList extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log(state);
 	return {
 		authenticated: state.auth.authenticated,
 		contacts: state.contacts

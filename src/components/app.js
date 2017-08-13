@@ -42,4 +42,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(null, { fetchContacts })(App));
+export default withRouter(connect(mapStateToProps, { fetchContacts })(App));

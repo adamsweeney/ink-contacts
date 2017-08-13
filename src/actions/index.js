@@ -56,9 +56,12 @@ export function createContact(values, callback) {
 	return function(dispatch) {
 		axios.post(`${LOCAL_URL}/contacts`, values, {
 			headers: { authorization: localStorage.getItem('token') }
-		}).then(() => {
-				dispatch({ type: CREATE_CONTACT });
-				callback();
+		}).then(response => {
+				dispatch({
+					type: CREATE_CONTACT,
+					payload: response
+				});
+				callback(response);
 			});
 	}
 }
