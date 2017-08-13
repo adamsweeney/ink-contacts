@@ -4,6 +4,7 @@ export const CREATE_CONTACT = 'CREATE_CONTACT';
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 export const FETCH_CONTACT = 'FETCH_CONTACT';
 export const DELETE_CONTACT = 'DELETE_CONTACT';
+export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -97,12 +98,29 @@ export function fetchContact(id) {
 	}
 }
 
+export function updateContact(values, id, callback) {
+	return function(dispatch) {
+		axios.put(`${LOCAL_URL}/contacts/${id}`, values, {
+			headers: { authorization: localStorage.getItem('token') }
+		}).then(response => {
+				dispatch({
+					type: UPDATE_CONTACT,
+					payload: response
+				});
+				callback(response);
+			});
+	}
+}
+
 export function deleteContact(id, callback) {
 	return function(dispatch) {
 	  axios.delete(`${LOCAL_URL}/contacts/${id}`, {
 			headers: { authorization: localStorage.getItem('token') }
 		}).then(() => {
-			dispatch({ type: DELETE_CONTACT});
+			dispatch({
+				type: DELETE_CONTACT,
+				payload: id
+			});
 			callback();
 		});
 	}

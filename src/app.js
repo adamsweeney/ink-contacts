@@ -18,6 +18,7 @@ import NotFound from './components/not_found';
 import ContactSelect from './components/contact_select';
 import ContactNew from './components/contact_new';
 import ContactDetail from './containers/contact_detail';
+import ContactUpdate from './containers/contact_update';
 import reducers from './reducers';
 
 import { AUTH_USER } from './actions';
@@ -41,6 +42,7 @@ ReactDOM.render(
             <Route path="/signout" component={Signout} />
             <Route path="/signup" component={Signup} />
 	          <Route path="/contacts/new" component={RequireAuth(ContactNew)} />
+            <Route path="/contacts/:id/edit" component={RequireAuth(ContactUpdate)} />
 						<Route path="/contacts/:id" component={RequireAuth(ContactDetail)} />
             <Route path="/" component={RequireAuth(ContactSelect)} />
 						<Route path="*" component={NotFound} />

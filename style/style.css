@@ -49,8 +49,12 @@ body, html, .container-fluid, .wrapper {
 	margin-right: 20px;
 }
 
-.details > h3 {
+.details-header {
 	text-align: center;
+}
+
+.details-header > h3 {
+	display: inline-block;
 }
 
 .details > p {

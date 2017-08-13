@@ -96,7 +96,6 @@ class ContactList extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log(state);
 	return {
 		authenticated: state.auth.authenticated,
 		contacts: state.contacts

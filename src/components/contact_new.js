@@ -45,11 +45,11 @@ class ContactNew extends Component {
 		return (
 			<div>
 					<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-					<Field label="First Name" name="first_name" value={this.state.code} onChange={this.onTextChange} component={this.renderField} />
-					<Field label="Last Name" name="last_name" value={this.state.name} onChange={this.onTextChange} component={this.renderField} />
-					<Field label="Phone" name="phone_number" value={this.state.market} onChange={this.onTextChange} component={this.renderField} />
-					<Field label="Email" name="email" value={this.state.buying_price} onChange={this.onTextChange} component={this.renderField} />
-					<RaisedButton primary type="submit" disabled={pristine || submitting} label="Submit" />
+					<Field label="First Name" name="first_name" value={this.state.first_name} onChange={this.onTextChange} component={this.renderField} />
+					<Field label="Last Name" name="last_name" value={this.state.last_name} onChange={this.onTextChange} component={this.renderField} />
+					<Field label="Phone" name="phone_number" value={this.state.phone_number} onChange={this.onTextChange} component={this.renderField} />
+					<Field label="Email" name="email" value={this.state.email} onChange={this.onTextChange} component={this.renderField} />
+					<RaisedButton primary type="submit" disabled={pristine || submitting} label="Create" />
 					<Link to="/">
 						<RaisedButton label="Cancel" secondary />
 					</Link>
