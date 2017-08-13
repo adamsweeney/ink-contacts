@@ -49,7 +49,8 @@ SelectableList = wrapState(SelectableList);
 
 class ContactList extends Component {
 	renderContacts() {
-		return _.map(this.props.contacts, contact => {
+		const { contacts } = this.props;
+		return _.map(contacts, contact => {
 			return (
 				<ListItem
 					containerElement={<Link to={this.renderPath(contact)} />}
