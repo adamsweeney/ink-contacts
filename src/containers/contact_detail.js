@@ -9,6 +9,7 @@ import _ from 'lodash';
 
 import ProfileImage from '../components/profile_image';
 import ToolbarOptions from '../containers/toolbar_options';
+import ContactInfo from '../components/contact_info';
 
 const removeSizing = {
 	height: 0,
@@ -57,11 +58,7 @@ class ContactDetail extends Component {
 								</a>
 							</IconButton>
 						</div>
-						<hr />
-						<p>First Name: {contact.first_name}</p>
-						<p>Last Name: {contact.last_name}</p>
-						<p>Phone Number: {contact.phone_number}</p>
-						<p>Email: {contact.email}</p>
+						<ContactInfo info={contact} />
 					</div>
 				</div>
 			</div>

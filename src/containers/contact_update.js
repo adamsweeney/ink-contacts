@@ -52,7 +52,7 @@ class ContactUpdate extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
-			<div>
+			<div className="contact-form">
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				<Field label="First Name" name="first_name" defaultValue={this.state.first_name || ''} value={this.state.first_name} onChange={this.onTextChange} component={this.renderField} />
 				<Field label="Last Name" name="last_name" defaultValue={this.state.first_name || ''} value={this.state.last_name} onChange={this.onTextChange} component={this.renderField} />

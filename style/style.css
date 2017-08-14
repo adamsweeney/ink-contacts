@@ -35,7 +35,7 @@ body, html, .container-fluid, .wrapper {
 .picture {
 	width: 300px;
 	height: 300px;
-	margin-top: 50px;
+	margin-top: 100px;
 	margin-left: 20px;
 }
 
@@ -51,18 +51,25 @@ body, html, .container-fluid, .wrapper {
 
 .details-header {
 	text-align: center;
+	border-bottom: 2px solid black;
+	margin-bottom: 50px;
 }
 
 .details-header > h3 {
 	display: inline-block;
 }
 
-.details > p {
-	margin-bottom: 30px;
+.contact-form {
+	padding-top: 50px;
+	margin: 0 auto;
+	width: 400px;
 }
 
-.dropzone {
-  width : 100%;
-  height : 10px;
-  border : 1px solid black;
+.auth-form {
+	margin-left: 200px;
+  margin-top: 50px;
+}
+
+.alert-danger {
+	width: 250px;
 }

@@ -26,6 +26,9 @@ class Signup extends Component {
 
 	onSubmit(values) {
 		this.props.signupUser(values, () => {
+			this.setState({
+      	open: true,
+    	});
 			this.props.history.push('/');
 		});
 	}
@@ -43,13 +46,15 @@ class Signup extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
-			<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				<Field label="Email" name="email" value={this.state.email} component={this.renderField} />
-				<Field label="Password" name="password" type="password" value={this.state.password} component={this.renderField} />
-				<Field label="Password Confirmation" name="password_confirm" type="password" value={this.state.passwordConfirm} component={this.renderField} />
-				{this.renderAlert()}
-				<RaisedButton primary type="submit" disabled={pristine || submitting} label="Sign up" />
-			</form>
+			<div className="auth-form">
+				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+					<Field label="Email" name="email" value={this.state.email} component={this.renderField} />
+					<Field label="Password" name="password" type="password" value={this.state.password} component={this.renderField} />
+					<Field label="Password Confirmation" name="password_confirm" type="password" value={this.state.passwordConfirm} component={this.renderField} />
+					{this.renderAlert()}
+					<RaisedButton primary type="submit" disabled={pristine || submitting} label="Sign up" />
+				</form>
+			</div>
 		);
 	}
 }
