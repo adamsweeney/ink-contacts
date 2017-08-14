@@ -5,30 +5,7 @@ import { connect } from 'react-redux';
 import { createContact } from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import Dropzone from 'react-dropzone';
-
-const renderDropzoneInput = (field) => {
-	const file = field.input.value;
-	console.log(field);
-  return (
-    <div>
-      <Dropzone
-				name={field.name}
-				multiple={false}
-        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
-      >
-      	<div>Click to upload image</div>
-      </Dropzone>
-			{file && file[0] && (
-        <ul>
-          { <li key={1}>{file[0].name}</li> }
-        </ul>
-      )}
-    </div>
-  );
-
-
-}
+import RenderDropzoneInput from './render_dropzone_input'
 
 class ContactNew extends Component {
 	constructor(props) {
@@ -82,7 +59,7 @@ class ContactNew extends Component {
 					<Field label="Email" name="email" value={this.state.email} onChange={this.onTextChange} component={this.renderField} />
           <Field
             name="avatar"
-            component={renderDropzoneInput}
+            component={RenderDropzoneInput}
           />
 					<RaisedButton style={{marginTop: 10}} primary type="submit" disabled={pristine || submitting} label="Create" />
 					<Link to="/">

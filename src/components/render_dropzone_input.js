@@ -1,0 +1,24 @@
+import React from 'react';
+import Dropzone from 'react-dropzone';
+
+const RenderDropzoneInput = (field) => {
+	const file = field.input.value;
+  return (
+    <div>
+      <Dropzone
+				name={field.name}
+				multiple={false}
+        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+      >
+      	<div>Click to upload image</div>
+      </Dropzone>
+			{file && file[0] && (
+        <ul>
+          { <li key={1}>{file[0].name}</li> }
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default RenderDropzoneInput;

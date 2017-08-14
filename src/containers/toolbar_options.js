@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import ContentFilter from 'material-ui/svg-icons/content/filter-list';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
@@ -15,16 +12,6 @@ class ToolbarOptions extends Component {
 		if(this.props.authenticated) {
 			return  (
 				<ToolbarGroup>
-					<IconMenu
-					iconButtonElement={
-						<IconButton touch={true}>
-							<ContentFilter />
-						</IconButton>
-						}
-					>
-						<MenuItem primaryText="Download" />
-						<MenuItem primaryText="More Info" />
-					</IconMenu>
 					<ToolbarSeparator />
 					<Link to="/contacts/new">
 						<RaisedButton label="Add Contact" primary={true} style={ {marginRight: 10} } />

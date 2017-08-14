@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { updateContact } from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import RenderDropzoneInput from '../components/render_dropzone_input';
 
 class ContactUpdate extends Component {
 	constructor(props) {
@@ -29,8 +30,15 @@ class ContactUpdate extends Component {
 
 	onSubmit(values) {
 		const { id } = this.props.match.params;
-		this.props.updateContact(values, id, response => {
-			this.props.history.push(`/contacts/${response.data.id}`);
+		var body = new FormData();
+		if (values["avatar"]) {
+			values["avatar"] = values["avatar"][0];
+		}
+    Object.keys(values).forEach(( key ) => {
+      body.append(key, values[ key ]);
+    });
+		this.props.updateContact(body, id, response => {
+			this.props.history.push(`/contacts/${response.data.contact.id}`);
 		});
 	}
 
@@ -50,6 +58,10 @@ class ContactUpdate extends Component {
 				<Field label="Last Name" name="last_name" defaultValue={this.state.first_name || ''} value={this.state.last_name} onChange={this.onTextChange} component={this.renderField} />
 				<Field label="Phone" name="phone_number" defaultValue={this.state.first_name || ''} value={this.state.phone_number} onChange={this.onTextChange} component={this.renderField} />
 				<Field label="Email" name="email" defaultValue={this.state.first_name || ''} value={this.state.email} onChange={this.onTextChange} component={this.renderField} />
+				<Field
+					name="avatar"
+					component={RenderDropzoneInput}
+				/>
 				<RaisedButton primary type="submit" disabled={pristine || submitting} label="Update" />
 				<Link to="/contacts/">
 					<RaisedButton label="Cancel" secondary />

@@ -49,15 +49,18 @@ SelectableList = wrapState(SelectableList);
 class ContactList extends Component {
 	renderContacts() {
 		const { contacts } = this.props;
+		let key = 0;
 		return _.map(contacts, contact => {
 			return (
 				<ListItem
+					key={key}
 					containerElement={<Link to={this.renderPath(contact)} />}
 					value={contact.id}
 					primaryText={this.renderName(contact)}
 					rightAvatar={<Avatar src={contact.avatar} />}
 				/>
 		 	);
+			key++;
 		});
 	}
 
