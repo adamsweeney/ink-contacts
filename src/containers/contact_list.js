@@ -29,7 +29,6 @@ function wrapState(ComposedComponent) {
       this.setState({
         selectedId: id,
       });
-			//this.props.history.push(`/contacts/${selectedId}`);
     };
 
 		render() {
@@ -56,6 +55,7 @@ class ContactList extends Component {
 					containerElement={<Link to={this.renderPath(contact)} />}
 					value={contact.id}
 					primaryText={this.renderName(contact)}
+					rightAvatar={<Avatar src={contact.avatar} />}
 				/>
 		 	);
 		});

@@ -39,7 +39,7 @@ class ContactDetail extends Component {
 			<div className="row">
 				<div className="col-lg-4 col-md-4 col-sm-4">
 					<div className="row">
-						<ProfileImage avatar={contact.avatar_file_name} />
+						<ProfileImage avatar={contact.avatar} />
 					</div>
 				</div>
 				<div className="col-lg-8 col-md-8 col-sm-8">

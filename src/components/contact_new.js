@@ -9,20 +9,21 @@ import Dropzone from 'react-dropzone';
 
 const renderDropzoneInput = (field) => {
 	const file = field.input.value;
+	console.log(field);
   return (
     <div>
       <Dropzone
-        name={field.name}
+				name={field.name}
 				multiple={false}
         onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
       >
       	<div>Click to upload image</div>
       </Dropzone>
-			{/* {file && (
+			{file && file[0] && (
         <ul>
           { <li key={1}>{file[0].name}</li> }
         </ul>
-      )} */}
+      )}
     </div>
   );
 
@@ -58,9 +59,8 @@ class ContactNew extends Component {
     Object.keys(values).forEach(( key ) => {
       body.append(key, values[ key ]);
     });
-		console.info('POST', body, values);
 		this.props.createContact(body, response => {
-			this.props.history.push(`/contacts/${response.data.id}`);
+			this.props.history.push(`/contacts/${response.data.contact.id}`);
 		});
 	}
 

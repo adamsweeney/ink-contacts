@@ -6,7 +6,8 @@ export default function(state = {}, action) {
 		case FETCH_CONTACTS:
 			return _.mapKeys(action.payload.data.contacts, 'id');
 	 	case FETCH_CONTACT:
-		 	return { ...state, [ action.payload.data.id ] : action.payload.data };
+			console.log(action.payload.data)
+		 	return { ...state, [ action.payload.data.contact.id ] : action.payload.data.contact };
 		case DELETE_CONTACT:
 			return _.omit(state, action.payload);
 		case CREATE_CONTACT:
