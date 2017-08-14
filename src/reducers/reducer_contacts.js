@@ -11,7 +11,7 @@ export default function(state = {}, action) {
 		case DELETE_CONTACT:
 			return _.omit(state, action.payload);
 		case CREATE_CONTACT:
-			return { ...state, [ action.payload.data.id ] : action.payload.data };
+			return { ...state, [ action.payload.data.contact.id ] : action.payload.data.contact };
 		case CONTACTS_ERROR:
 			return { ...state, error: action.payload };
 		default:

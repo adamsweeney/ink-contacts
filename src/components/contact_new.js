@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createContact } from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import RenderDropzoneInput from './render_dropzone_input'
+import RenderDropzoneInput from './render_dropzone_input';
 
 class ContactNew extends Component {
 	constructor(props) {
