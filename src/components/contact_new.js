@@ -5,6 +5,29 @@ import { connect } from 'react-redux';
 import { createContact } from '../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Dropzone from 'react-dropzone';
+
+const renderDropzoneInput = (field) => {
+	const file = field.input.value;
+  return (
+    <div>
+      <Dropzone
+        name={field.name}
+				multiple={false}
+        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+      >
+      	<div>Click to upload image</div>
+      </Dropzone>
+			{/* {file && (
+        <ul>
+          { <li key={1}>{file[0].name}</li> }
+        </ul>
+      )} */}
+    </div>
+  );
+
+
+}
 
 class ContactNew extends Component {
 	constructor(props) {
@@ -28,7 +51,15 @@ class ContactNew extends Component {
 	}
 
 	onSubmit(values) {
-		this.props.createContact(values, response => {
+		var body = new FormData();
+		if (values["avatar"]) {
+			values["avatar"] = values["avatar"][0];
+		}
+    Object.keys(values).forEach(( key ) => {
+      body.append(key, values[ key ]);
+    });
+		console.info('POST', body, values);
+		this.props.createContact(body, response => {
 			this.props.history.push(`/contacts/${response.data.id}`);
 		});
 	}
@@ -49,9 +80,13 @@ class ContactNew extends Component {
 					<Field label="Last Name" name="last_name" value={this.state.last_name} onChange={this.onTextChange} component={this.renderField} />
 					<Field label="Phone" name="phone_number" value={this.state.phone_number} onChange={this.onTextChange} component={this.renderField} />
 					<Field label="Email" name="email" value={this.state.email} onChange={this.onTextChange} component={this.renderField} />
-					<RaisedButton primary type="submit" disabled={pristine || submitting} label="Create" />
+          <Field
+            name="avatar"
+            component={renderDropzoneInput}
+          />
+					<RaisedButton style={{marginTop: 10}} primary type="submit" disabled={pristine || submitting} label="Create" />
 					<Link to="/">
-						<RaisedButton label="Cancel" secondary />
+						<RaisedButton style={{marginTop: 10}} label="Cancel" secondary />
 					</Link>
 				</form>
 			</div>
